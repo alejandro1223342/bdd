@@ -1,12 +1,12 @@
-select numero_cuenta,nombre from cuentas where 
+select numero_cuenta,nombre from cuentas,usuario where 
+cuentas.cedula_propietario=usuario.cedula and
 saldo between '100' and '1000'
 
-select *
-from usuario,cuentas where 
+select * from 
+usuario,cuentas where 
 usuario.cedula = cuentas.cedula_propietario
 and cuentas.fecha_creacion between
 '2022-09-21' and '2023-05-15'
-
 
 select nombre,apellido
 from cliente where cedula like '%7%'
@@ -26,10 +26,12 @@ where profresores.codigo = estudiantes.codigo_profesor
 and profresores.codigo = 
 (Select codigo from profresores where nombre='Francisco')
 
+--
 select cantidad_ahorrada,monto,garante
 from prestamo,persona 
 where prestamo.cedula=persona.cedula and 
 monto between '100' and '1000'
+--
 
 select *
 from prestamo,persona 
@@ -40,7 +42,7 @@ and persona.cedula =
 select nombre,stock,cantidad from productos,ventas 
 where  productos.codigo = ventas.codigo_producto
 and productos.nombre like '%M%' 
-or productos.descripcion = 0;
+or productos.descripcion is not null;
 
 
 select nombre,stock from productos,ventas 
